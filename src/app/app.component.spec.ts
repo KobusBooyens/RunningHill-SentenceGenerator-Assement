@@ -19,7 +19,7 @@ describe('AppComponent', () => {
   it(`should have as title 'SentenceGeneratorWebApp'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('SentenceGeneratorWebApp');
+    expect(app.pageTitle).toEqual('Sentence Generator');
   });
 
   it('should render title', () => {

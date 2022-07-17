@@ -1,0 +1,56 @@
+<div class="card">
+    <div class="card-header">
+        {{pageTitle}}
+    </div>
+
+    <form class="form-control">
+        <div class="form-group">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        <select id="wordType" class="form-select" name ="wordType" 
+                                #wordType (change)="enableWordLibraryDropDown(wordType.value)" 
+                                placeholder="wordTypePlaceHolderValue" [disabled]="!toggleWordTypeDropDown" [(ngModel)]="selectedWordType">
+                            <option default>{{wordTypePlaceHolderValue}}</option>
+                            <option *ngFor="let item of wordRepositories">
+                                {{item.wordType}}
+                            </option> 
+                        </select>
+                    </div>
+                    <div class="col">
+                        <select id="wordLibrary" class="form-select" name ="wordLibrary" 
+                                #wordLibrary (change)="buildSentence(wordLibrary.value)" 
+                                placeholder="wordLibraryPlaceholderValue" [disabled]="!enableWordLibraryComponent" [(ngModel)]="selectedWordLibrary">
+                            <option default>{{wordLibraryPlaceholderValue}}</option>
+                            <option *ngFor="let item of currentWordLibrary">
+                                {{item}}
+                            </option>
+                      </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input class="form-control" type="text" value="{{constructedSentence}}" name="readOnlyText" [(ngModel)]="constructedSentence" readonly >
+            </div>
+
+            <div [hidden]="!postError" class="alert alert-danger">
+                {{postErrorMessage}}
+            </div>
+
+            <div [hidden]="!postSuccess" class="alert alert-success">
+                {{postSuccessMessage}}
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <button (click)="onUndo()" type="button" class="btn btn-primary" id="btnUndo" [disabled]="constructedSentence ===''">Undo</button>
+                </div>
+         
+                <div class="col" >
+                        <button (click)="onSave(constructedSentence)" type="button" class="btn btn-primary" id="btnSave" [disabled]="constructedSentence ===''">Save</button>        
+                </div>   
+            </div>
+        </div>              
+    </form>
+</div>
